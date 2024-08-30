@@ -169,15 +169,13 @@ output
 ```c++
 function v_cover(Graph g)
 {
-g.attachNodeProperty(visited = False);
-    forall(v in g.nodes().filter(node == False))
-    {
-    forall(nbr in g.neighbors(v))
-    {
-        if(nbr == False)
-        {
-    g.visited[nbr] = True;
-    g.visited[v] = True;
+    propNode<bool> visited;
+    g.attachNodeProperty(visited = False);
+    forall(v in g.nodes().filter(visited == False)){
+    for(nbr in g.neighbors(v)){
+        if(nbr.visited == False){
+            nbr.visited = True;
+            v.visited = True;
         }
     }
     }

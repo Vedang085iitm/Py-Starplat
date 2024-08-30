@@ -83,8 +83,11 @@ class ASTToCustomTranslator(ast.NodeVisitor):
         self.translated_code.append("        }\n")
 
     def visit_Return(self, node):
+        if isinstance(node.value, ast.Name) and node.value.id == 'vc':
+            return  # Skip the return statement if it returns 'vc'
         value = self.visit(node.value)
-        self.translated_code.append(f"    return {value};\n")
+        self.translated_code.append(f"  return {value};\n")
+
 
     def visit_Name(self, node):
         return node.id
