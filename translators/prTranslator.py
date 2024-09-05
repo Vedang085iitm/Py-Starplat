@@ -83,4 +83,9 @@ def translate_ast_to_code(parsed_ast):
 
 # Generate the function code
 function_code = translate_ast_to_code(module)
-print(function_code)
+# Create the output directory if it doesn't exist
+os.makedirs('output', exist_ok=True)
+
+# Save the DSL code to a file in the output directory
+with open('output/pageRankDSL', 'w') as file:
+    file.write(function_code)
