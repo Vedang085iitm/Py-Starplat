@@ -1,5 +1,5 @@
 import ast
-
+import os
 # Construct the AST nodes directly
 function_def = ast.FunctionDef(
     name='Compute_PR',
@@ -87,5 +87,5 @@ function_code = translate_ast_to_code(module)
 os.makedirs('output', exist_ok=True)
 
 # Save the DSL code to a file in the output directory
-with open('output/pageRankDSL', 'w') as file:
+with open('output/pageRankDSL.txt', 'w') as file:
     file.write(function_code)

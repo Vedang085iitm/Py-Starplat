@@ -1,0 +1,1493 @@
+('Module(\n'
+ '    body=[\n'
+ '        Import(\n'
+ '            names=[\n'
+ "                alias(name='ast')]),\n"
+ '        ClassDef(\n'
+ "            name='PythonToDSLTransformer',\n"
+ '            bases=[\n'
+ '                Attribute(\n'
+ "                    value=Name(id='ast', ctx=Load()),\n"
+ "                    attr='NodeVisitor',\n"
+ '                    ctx=Load())],\n'
+ '            keywords=[],\n'
+ '            body=[\n'
+ '                FunctionDef(\n'
+ "                    name='__init__',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ '                                Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='dsl_code',\n"
+ '                                    ctx=Store())],\n'
+ '                            value=List(elts=[], ctx=Load())),\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ '                                Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='in_function',\n"
+ '                                    ctx=Store())],\n'
+ '                            value=Constant(value=False)),\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ '                                Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='node_properties',\n"
+ '                                    ctx=Store())],\n'
+ '                            value=List(elts=[], ctx=Load())),\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ '                                Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='current_function',\n"
+ '                                    ctx=Store())],\n'
+ '                            value=Constant(value=None))],\n'
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_FunctionDef',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ '                                Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='in_function',\n"
+ '                                    ctx=Store())],\n'
+ '                            value=Constant(value=True)),\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ '                                Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='current_function',\n"
+ '                                    ctx=Store())],\n'
+ '                            value=Attribute(\n'
+ "                                value=Name(id='node', ctx=Load()),\n"
+ "                                attr='name',\n"
+ '                                ctx=Load())),\n'
+ '                        Expr(\n'
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ '                                    value=Attribute(\n'
+ "                                        value=Name(id='self', ctx=Load()),\n"
+ "                                        attr='dsl_code',\n"
+ '                                        ctx=Load()),\n'
+ "                                    attr='append',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ '                                    JoinedStr(\n'
+ '                                        values=[\n'
+ "                                            Constant(value='function '),\n"
+ '                                            FormattedValue(\n'
+ '                                                value=Attribute(\n'
+ "                                                    value=Name(id='node', "
+ 'ctx=Load()),\n'
+ "                                                    attr='name',\n"
+ '                                                    ctx=Load()),\n'
+ '                                                conversion=-1),\n'
+ "                                            Constant(value=' (Graph g, node "
+ "src)\\n{\\n')])],\n"
+ '                                keywords=[])),\n'
+ '                        Expr(\n'
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='generic_visit',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ "                                    Name(id='node', ctx=Load())],\n"
+ '                                keywords=[])),\n'
+ '                        If(\n'
+ '                            test=Attribute(\n'
+ "                                value=Name(id='self', ctx=Load()),\n"
+ "                                attr='node_properties',\n"
+ '                                ctx=Load()),\n'
+ '                            body=[\n'
+ '                                For(\n'
+ "                                    target=Name(id='prop', ctx=Store()),\n"
+ '                                    iter=Attribute(\n'
+ "                                        value=Name(id='self', ctx=Load()),\n"
+ "                                        attr='node_properties',\n"
+ '                                        ctx=Load()),\n'
+ '                                    body=[\n'
+ '                                        If(\n'
+ '                                            test=Compare(\n'
+ '                                                left=Subscript(\n'
+ "                                                    value=Name(id='prop', "
+ 'ctx=Load()),\n'
+ '                                                    '
+ "slice=Constant(value='name'),\n"
+ '                                                    ctx=Load()),\n'
+ '                                                ops=[\n'
+ '                                                    In()],\n'
+ '                                                comparators=[\n'
+ '                                                    List(\n'
+ '                                                        elts=[\n'
+ '                                                            '
+ "Constant(value='distance'),\n"
+ '                                                            '
+ "Constant(value='modified')],\n"
+ '                                                        ctx=Load())]),\n'
+ '                                            body=[\n'
+ '                                                Assign(\n'
+ '                                                    targets=[\n'
+ "                                                        Name(id='prop_type', "
+ 'ctx=Store())],\n'
+ '                                                    value=IfExp(\n'
+ '                                                        test=Compare(\n'
+ '                                                            left=Subscript(\n'
+ '                                                                '
+ "value=Name(id='prop', ctx=Load()),\n"
+ '                                                                '
+ "slice=Constant(value='name'),\n"
+ '                                                                '
+ 'ctx=Load()),\n'
+ '                                                            ops=[\n'
+ '                                                                Eq()],\n'
+ '                                                            comparators=[\n'
+ '                                                                '
+ "Constant(value='distance')]),\n"
+ '                                                        '
+ "body=Constant(value='int'),\n"
+ '                                                        '
+ "orelse=Constant(value='bool'))),\n"
+ '                                                Expr(\n'
+ '                                                    value=Call(\n'
+ '                                                        func=Attribute(\n'
+ '                                                            '
+ 'value=Attribute(\n'
+ '                                                                '
+ "value=Name(id='self', ctx=Load()),\n"
+ '                                                                '
+ "attr='dsl_code',\n"
+ '                                                                '
+ 'ctx=Load()),\n'
+ "                                                            attr='append',\n"
+ '                                                            ctx=Load()),\n'
+ '                                                        args=[\n'
+ '                                                            JoinedStr(\n'
+ '                                                                values=[\n'
+ '                                                                    '
+ "Constant(value='propNode<'),\n"
+ '                                                                    '
+ 'FormattedValue(\n'
+ '                                                                        '
+ "value=Name(id='prop_type', ctx=Load()),\n"
+ '                                                                        '
+ 'conversion=-1),\n'
+ '                                                                    '
+ "Constant(value='> '),\n"
+ '                                                                    '
+ 'FormattedValue(\n'
+ '                                                                        '
+ 'value=Subscript(\n'
+ '                                                                            '
+ "value=Name(id='prop', ctx=Load()),\n"
+ '                                                                            '
+ "slice=Constant(value='name'),\n"
+ '                                                                            '
+ 'ctx=Load()),\n'
+ '                                                                        '
+ 'conversion=-1),\n'
+ '                                                                    '
+ "Constant(value=';\\n')])],\n"
+ '                                                        keywords=[]))],\n'
+ '                                            orelse=[])],\n'
+ '                                    orelse=[]),\n'
+ '                                Assign(\n'
+ '                                    targets=[\n'
+ '                                        Attribute(\n'
+ "                                            value=Name(id='self', "
+ 'ctx=Load()),\n'
+ "                                            attr='node_properties',\n"
+ '                                            ctx=Store())],\n'
+ '                                    value=List(elts=[], ctx=Load()))],\n'
+ '                            orelse=[]),\n'
+ '                        Expr(\n'
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ '                                    value=Attribute(\n'
+ "                                        value=Name(id='self', ctx=Load()),\n"
+ "                                        attr='dsl_code',\n"
+ '                                        ctx=Load()),\n'
+ "                                    attr='append',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ "                                    Constant(value='}\\n')],\n"
+ '                                keywords=[])),\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ '                                Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='in_function',\n"
+ '                                    ctx=Store())],\n'
+ '                            value=Constant(value=False))],\n'
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_Assign',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        If(\n'
+ '                            test=Call(\n'
+ "                                func=Name(id='isinstance', ctx=Load()),\n"
+ '                                args=[\n'
+ '                                    Attribute(\n'
+ "                                        value=Name(id='node', ctx=Load()),\n"
+ "                                        attr='value',\n"
+ '                                        ctx=Load()),\n'
+ '                                    Attribute(\n'
+ "                                        value=Name(id='ast', ctx=Load()),\n"
+ "                                        attr='Call',\n"
+ '                                        ctx=Load())],\n'
+ '                                keywords=[]),\n'
+ '                            body=[\n'
+ '                                Assign(\n'
+ '                                    targets=[\n'
+ "                                        Name(id='func_name', ctx=Store())],\n"
+ '                                    value=Call(\n'
+ '                                        func=Attribute(\n'
+ "                                            value=Name(id='self', "
+ 'ctx=Load()),\n'
+ "                                            attr='visit',\n"
+ '                                            ctx=Load()),\n'
+ '                                        args=[\n'
+ '                                            Attribute(\n'
+ '                                                value=Attribute(\n'
+ "                                                    value=Name(id='node', "
+ 'ctx=Load()),\n'
+ "                                                    attr='value',\n"
+ '                                                    ctx=Load()),\n'
+ "                                                attr='func',\n"
+ '                                                ctx=Load())],\n'
+ '                                        keywords=[])),\n'
+ '                                If(\n'
+ '                                    test=Compare(\n'
+ "                                        left=Name(id='func_name', "
+ 'ctx=Load()),\n'
+ '                                        ops=[\n'
+ '                                            Eq()],\n'
+ '                                        comparators=[\n'
+ '                                            '
+ "Constant(value='g.attachNodeProperty')]),\n"
+ '                                    body=[\n'
+ '                                        Assign(\n'
+ '                                            targets=[\n'
+ "                                                Name(id='args', "
+ 'ctx=Store())],\n'
+ '                                            value=ListComp(\n'
+ '                                                elt=Call(\n'
+ '                                                    func=Attribute(\n'
+ '                                                        '
+ "value=Name(id='self', ctx=Load()),\n"
+ "                                                        attr='visit',\n"
+ '                                                        ctx=Load()),\n'
+ '                                                    args=[\n'
+ "                                                        Name(id='arg', "
+ 'ctx=Load())],\n'
+ '                                                    keywords=[]),\n'
+ '                                                generators=[\n'
+ '                                                    comprehension(\n'
+ '                                                        '
+ "target=Name(id='arg', ctx=Store()),\n"
+ '                                                        iter=Attribute(\n'
+ '                                                            '
+ 'value=Attribute(\n'
+ '                                                                '
+ "value=Name(id='node', ctx=Load()),\n"
+ '                                                                '
+ "attr='value',\n"
+ '                                                                '
+ 'ctx=Load()),\n'
+ "                                                            attr='args',\n"
+ '                                                            ctx=Load()),\n'
+ '                                                        ifs=[],\n'
+ '                                                        is_async=0)])),\n'
+ '                                        Assign(\n'
+ '                                            targets=[\n'
+ "                                                Name(id='prop_defs', "
+ 'ctx=Store())],\n'
+ '                                            value=Call(\n'
+ '                                                func=Attribute(\n'
+ "                                                    value=Constant(value=', "
+ "'),\n"
+ "                                                    attr='join',\n"
+ '                                                    ctx=Load()),\n'
+ '                                                args=[\n'
+ "                                                    Name(id='args', "
+ 'ctx=Load())],\n'
+ '                                                keywords=[])),\n'
+ '                                        Expr(\n'
+ '                                            value=Call(\n'
+ '                                                func=Attribute(\n'
+ '                                                    value=Attribute(\n'
+ '                                                        '
+ "value=Name(id='self', ctx=Load()),\n"
+ "                                                        attr='dsl_code',\n"
+ '                                                        ctx=Load()),\n'
+ "                                                    attr='append',\n"
+ '                                                    ctx=Load()),\n'
+ '                                                args=[\n'
+ '                                                    JoinedStr(\n'
+ '                                                        values=[\n'
+ '                                                            '
+ "Constant(value='g.attachNodeProperty('),\n"
+ '                                                            FormattedValue(\n'
+ '                                                                '
+ "value=Name(id='prop_defs', ctx=Load()),\n"
+ '                                                                '
+ 'conversion=-1),\n'
+ '                                                            '
+ "Constant(value=');\\n')])],\n"
+ '                                                keywords=[]))],\n'
+ '                                    orelse=[\n'
+ '                                        Assign(\n'
+ '                                            targets=[\n'
+ "                                                Name(id='targets', "
+ 'ctx=Store())],\n'
+ '                                            value=ListComp(\n'
+ '                                                elt=Call(\n'
+ '                                                    func=Attribute(\n'
+ '                                                        '
+ "value=Name(id='self', ctx=Load()),\n"
+ "                                                        attr='visit',\n"
+ '                                                        ctx=Load()),\n'
+ '                                                    args=[\n'
+ "                                                        Name(id='t', "
+ 'ctx=Load())],\n'
+ '                                                    keywords=[]),\n'
+ '                                                generators=[\n'
+ '                                                    comprehension(\n'
+ "                                                        target=Name(id='t', "
+ 'ctx=Store()),\n'
+ '                                                        iter=Attribute(\n'
+ '                                                            '
+ "value=Name(id='node', ctx=Load()),\n"
+ "                                                            attr='targets',\n"
+ '                                                            ctx=Load()),\n'
+ '                                                        ifs=[],\n'
+ '                                                        is_async=0)])),\n'
+ '                                        Assign(\n'
+ '                                            targets=[\n'
+ "                                                Name(id='value', "
+ 'ctx=Store())],\n'
+ '                                            value=Call(\n'
+ '                                                func=Attribute(\n'
+ "                                                    value=Name(id='self', "
+ 'ctx=Load()),\n'
+ "                                                    attr='visit',\n"
+ '                                                    ctx=Load()),\n'
+ '                                                args=[\n'
+ '                                                    Attribute(\n'
+ '                                                        '
+ "value=Name(id='node', ctx=Load()),\n"
+ "                                                        attr='value',\n"
+ '                                                        ctx=Load())],\n'
+ '                                                keywords=[])),\n'
+ '                                        Expr(\n'
+ '                                            value=Call(\n'
+ '                                                func=Attribute(\n'
+ '                                                    value=Attribute(\n'
+ '                                                        '
+ "value=Name(id='self', ctx=Load()),\n"
+ "                                                        attr='dsl_code',\n"
+ '                                                        ctx=Load()),\n'
+ "                                                    attr='append',\n"
+ '                                                    ctx=Load()),\n'
+ '                                                args=[\n'
+ '                                                    JoinedStr(\n'
+ '                                                        values=[\n'
+ '                                                            FormattedValue(\n'
+ '                                                                '
+ 'value=Subscript(\n'
+ '                                                                    '
+ "value=Name(id='targets', ctx=Load()),\n"
+ '                                                                    '
+ 'slice=Constant(value=0),\n'
+ '                                                                    '
+ 'ctx=Load()),\n'
+ '                                                                '
+ 'conversion=-1),\n'
+ "                                                            Constant(value=' "
+ "= '),\n"
+ '                                                            FormattedValue(\n'
+ '                                                                '
+ "value=Name(id='value', ctx=Load()),\n"
+ '                                                                '
+ 'conversion=-1),\n'
+ '                                                            '
+ "Constant(value=';\\n')])],\n"
+ '                                                keywords=[]))])],\n'
+ '                            orelse=[\n'
+ '                                Assign(\n'
+ '                                    targets=[\n'
+ "                                        Name(id='targets', ctx=Store())],\n"
+ '                                    value=ListComp(\n'
+ '                                        elt=Call(\n'
+ '                                            func=Attribute(\n'
+ "                                                value=Name(id='self', "
+ 'ctx=Load()),\n'
+ "                                                attr='visit',\n"
+ '                                                ctx=Load()),\n'
+ '                                            args=[\n'
+ "                                                Name(id='t', ctx=Load())],\n"
+ '                                            keywords=[]),\n'
+ '                                        generators=[\n'
+ '                                            comprehension(\n'
+ "                                                target=Name(id='t', "
+ 'ctx=Store()),\n'
+ '                                                iter=Attribute(\n'
+ "                                                    value=Name(id='node', "
+ 'ctx=Load()),\n'
+ "                                                    attr='targets',\n"
+ '                                                    ctx=Load()),\n'
+ '                                                ifs=[],\n'
+ '                                                is_async=0)])),\n'
+ '                                Assign(\n'
+ '                                    targets=[\n'
+ "                                        Name(id='value', ctx=Store())],\n"
+ '                                    value=Call(\n'
+ '                                        func=Attribute(\n'
+ "                                            value=Name(id='self', "
+ 'ctx=Load()),\n'
+ "                                            attr='visit',\n"
+ '                                            ctx=Load()),\n'
+ '                                        args=[\n'
+ '                                            Attribute(\n'
+ "                                                value=Name(id='node', "
+ 'ctx=Load()),\n'
+ "                                                attr='value',\n"
+ '                                                ctx=Load())],\n'
+ '                                        keywords=[])),\n'
+ '                                Expr(\n'
+ '                                    value=Call(\n'
+ '                                        func=Attribute(\n'
+ '                                            value=Attribute(\n'
+ "                                                value=Name(id='self', "
+ 'ctx=Load()),\n'
+ "                                                attr='dsl_code',\n"
+ '                                                ctx=Load()),\n'
+ "                                            attr='append',\n"
+ '                                            ctx=Load()),\n'
+ '                                        args=[\n'
+ '                                            JoinedStr(\n'
+ '                                                values=[\n'
+ '                                                    FormattedValue(\n'
+ '                                                        value=Subscript(\n'
+ '                                                            '
+ "value=Name(id='targets', ctx=Load()),\n"
+ '                                                            '
+ 'slice=Constant(value=0),\n'
+ '                                                            ctx=Load()),\n'
+ '                                                        conversion=-1),\n'
+ "                                                    Constant(value=' = '),\n"
+ '                                                    FormattedValue(\n'
+ '                                                        '
+ "value=Name(id='value', ctx=Load()),\n"
+ '                                                        conversion=-1),\n'
+ '                                                    '
+ "Constant(value=';\\n')])],\n"
+ '                                        keywords=[]))])],\n'
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_Name',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Return(\n'
+ '                            value=Attribute(\n'
+ "                                value=Name(id='node', ctx=Load()),\n"
+ "                                attr='id',\n"
+ '                                ctx=Load()))],\n'
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_Constant',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        If(\n'
+ '                            test=Call(\n'
+ "                                func=Name(id='isinstance', ctx=Load()),\n"
+ '                                args=[\n'
+ '                                    Attribute(\n'
+ "                                        value=Name(id='node', ctx=Load()),\n"
+ "                                        attr='value',\n"
+ '                                        ctx=Load()),\n'
+ "                                    Name(id='float', ctx=Load())],\n"
+ '                                keywords=[]),\n'
+ '                            body=[\n'
+ '                                Return(\n'
+ '                                    value=JoinedStr(\n'
+ '                                        values=[\n'
+ '                                            FormattedValue(\n'
+ '                                                value=Attribute(\n'
+ "                                                    value=Name(id='node', "
+ 'ctx=Load()),\n'
+ "                                                    attr='value',\n"
+ '                                                    ctx=Load()),\n'
+ '                                                conversion=-1,\n'
+ '                                                format_spec=JoinedStr(\n'
+ '                                                    values=[\n'
+ '                                                        '
+ "Constant(value='.2f')]))]))],\n"
+ '                            orelse=[\n'
+ '                                If(\n'
+ '                                    test=Call(\n'
+ "                                        func=Name(id='isinstance', "
+ 'ctx=Load()),\n'
+ '                                        args=[\n'
+ '                                            Attribute(\n'
+ "                                                value=Name(id='node', "
+ 'ctx=Load()),\n'
+ "                                                attr='value',\n"
+ '                                                ctx=Load()),\n'
+ "                                            Name(id='int', ctx=Load())],\n"
+ '                                        keywords=[]),\n'
+ '                                    body=[\n'
+ '                                        Return(\n'
+ '                                            value=Call(\n'
+ "                                                func=Name(id='str', "
+ 'ctx=Load()),\n'
+ '                                                args=[\n'
+ '                                                    Attribute(\n'
+ '                                                        '
+ "value=Name(id='node', ctx=Load()),\n"
+ "                                                        attr='value',\n"
+ '                                                        ctx=Load())],\n'
+ '                                                keywords=[]))],\n'
+ '                                    orelse=[\n'
+ '                                        If(\n'
+ '                                            test=Call(\n'
+ "                                                func=Name(id='isinstance', "
+ 'ctx=Load()),\n'
+ '                                                args=[\n'
+ '                                                    Attribute(\n'
+ '                                                        '
+ "value=Name(id='node', ctx=Load()),\n"
+ "                                                        attr='value',\n"
+ '                                                        ctx=Load()),\n'
+ "                                                    Name(id='bool', "
+ 'ctx=Load())],\n'
+ '                                                keywords=[]),\n'
+ '                                            body=[\n'
+ '                                                Return(\n'
+ '                                                    value=IfExp(\n'
+ '                                                        test=Attribute(\n'
+ '                                                            '
+ "value=Name(id='node', ctx=Load()),\n"
+ "                                                            attr='value',\n"
+ '                                                            ctx=Load()),\n'
+ '                                                        '
+ "body=Constant(value='True'),\n"
+ '                                                        '
+ "orelse=Constant(value='False')))],\n"
+ '                                            orelse=[])])]),\n'
+ '                        Return(\n'
+ '                            value=Call(\n'
+ "                                func=Name(id='str', ctx=Load()),\n"
+ '                                args=[\n'
+ '                                    Attribute(\n'
+ "                                        value=Name(id='node', ctx=Load()),\n"
+ "                                        attr='value',\n"
+ '                                        ctx=Load())],\n'
+ '                                keywords=[]))],\n'
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_Expr',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Expr(\n'
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ '                                    value=Attribute(\n'
+ "                                        value=Name(id='self', ctx=Load()),\n"
+ "                                        attr='dsl_code',\n"
+ '                                        ctx=Load()),\n'
+ "                                    attr='append',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ '                                    BinOp(\n'
+ '                                        left=Call(\n'
+ '                                            func=Attribute(\n'
+ "                                                value=Name(id='self', "
+ 'ctx=Load()),\n'
+ "                                                attr='visit',\n"
+ '                                                ctx=Load()),\n'
+ '                                            args=[\n'
+ '                                                Attribute(\n'
+ "                                                    value=Name(id='node', "
+ 'ctx=Load()),\n'
+ "                                                    attr='value',\n"
+ '                                                    ctx=Load())],\n'
+ '                                            keywords=[]),\n'
+ '                                        op=Add(),\n'
+ "                                        right=Constant(value=';\\n'))],\n"
+ '                                keywords=[]))],\n'
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_Call',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ "                                Name(id='func_name', ctx=Store())],\n"
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='visit',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ '                                    Attribute(\n'
+ "                                        value=Name(id='node', ctx=Load()),\n"
+ "                                        attr='func',\n"
+ '                                        ctx=Load())],\n'
+ '                                keywords=[])),\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ "                                Name(id='args', ctx=Store())],\n"
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ "                                    value=Constant(value=', '),\n"
+ "                                    attr='join',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ '                                    GeneratorExp(\n'
+ '                                        elt=Call(\n'
+ '                                            func=Attribute(\n'
+ "                                                value=Name(id='self', "
+ 'ctx=Load()),\n'
+ "                                                attr='visit',\n"
+ '                                                ctx=Load()),\n'
+ '                                            args=[\n'
+ "                                                Name(id='arg', "
+ 'ctx=Load())],\n'
+ '                                            keywords=[]),\n'
+ '                                        generators=[\n'
+ '                                            comprehension(\n'
+ "                                                target=Name(id='arg', "
+ 'ctx=Store()),\n'
+ '                                                iter=Attribute(\n'
+ "                                                    value=Name(id='node', "
+ 'ctx=Load()),\n'
+ "                                                    attr='args',\n"
+ '                                                    ctx=Load()),\n'
+ '                                                ifs=[],\n'
+ '                                                is_async=0)])],\n'
+ '                                keywords=[])),\n'
+ '                        Return(\n'
+ '                            value=JoinedStr(\n'
+ '                                values=[\n'
+ '                                    FormattedValue(\n'
+ "                                        value=Name(id='func_name', "
+ 'ctx=Load()),\n'
+ '                                        conversion=-1),\n'
+ "                                    Constant(value='('),\n"
+ '                                    FormattedValue(\n'
+ "                                        value=Name(id='args', ctx=Load()),\n"
+ '                                        conversion=-1),\n'
+ "                                    Constant(value=')')]))],\n"
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_Attribute',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ "                                Name(id='value', ctx=Store())],\n"
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='visit',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ '                                    Attribute(\n'
+ "                                        value=Name(id='node', ctx=Load()),\n"
+ "                                        attr='value',\n"
+ '                                        ctx=Load())],\n'
+ '                                keywords=[])),\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ "                                Name(id='attr', ctx=Store())],\n"
+ '                            value=Attribute(\n'
+ "                                value=Name(id='node', ctx=Load()),\n"
+ "                                attr='attr',\n"
+ '                                ctx=Load())),\n'
+ '                        Return(\n'
+ '                            value=JoinedStr(\n'
+ '                                values=[\n'
+ '                                    FormattedValue(\n'
+ "                                        value=Name(id='value', ctx=Load()),\n"
+ '                                        conversion=-1),\n'
+ "                                    Constant(value='.'),\n"
+ '                                    FormattedValue(\n'
+ "                                        value=Name(id='attr', ctx=Load()),\n"
+ '                                        conversion=-1)]))],\n'
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_If',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ "                                Name(id='test', ctx=Store())],\n"
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='visit',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ '                                    Attribute(\n'
+ "                                        value=Name(id='node', ctx=Load()),\n"
+ "                                        attr='test',\n"
+ '                                        ctx=Load())],\n'
+ '                                keywords=[])),\n'
+ '                        Expr(\n'
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ '                                    value=Attribute(\n'
+ "                                        value=Name(id='self', ctx=Load()),\n"
+ "                                        attr='dsl_code',\n"
+ '                                        ctx=Load()),\n'
+ "                                    attr='append',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ '                                    JoinedStr(\n'
+ '                                        values=[\n'
+ "                                            Constant(value='if ('),\n"
+ '                                            FormattedValue(\n'
+ "                                                value=Name(id='test', "
+ 'ctx=Load()),\n'
+ '                                                conversion=-1),\n'
+ "                                            Constant(value=')\\n{\\n')])],\n"
+ '                                keywords=[])),\n'
+ '                        For(\n'
+ "                            target=Name(id='stmt', ctx=Store()),\n"
+ '                            iter=Attribute(\n'
+ "                                value=Name(id='node', ctx=Load()),\n"
+ "                                attr='body',\n"
+ '                                ctx=Load()),\n'
+ '                            body=[\n'
+ '                                Expr(\n'
+ '                                    value=Call(\n'
+ '                                        func=Attribute(\n'
+ '                                            value=Attribute(\n'
+ "                                                value=Name(id='self', "
+ 'ctx=Load()),\n'
+ "                                                attr='dsl_code',\n"
+ '                                                ctx=Load()),\n'
+ "                                            attr='append',\n"
+ '                                            ctx=Load()),\n'
+ '                                        args=[\n'
+ '                                            BinOp(\n'
+ "                                                left=Constant(value='    "
+ "'),\n"
+ '                                                op=Add(),\n'
+ '                                                right=Call(\n'
+ '                                                    func=Attribute(\n'
+ '                                                        '
+ "value=Name(id='self', ctx=Load()),\n"
+ "                                                        attr='visit',\n"
+ '                                                        ctx=Load()),\n'
+ '                                                    args=[\n'
+ "                                                        Name(id='stmt', "
+ 'ctx=Load())],\n'
+ '                                                    keywords=[]))],\n'
+ '                                        keywords=[]))],\n'
+ '                            orelse=[]),\n'
+ '                        Expr(\n'
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ '                                    value=Attribute(\n'
+ "                                        value=Name(id='self', ctx=Load()),\n"
+ "                                        attr='dsl_code',\n"
+ '                                        ctx=Load()),\n'
+ "                                    attr='append',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ "                                    Constant(value='}\\n')],\n"
+ '                                keywords=[]))],\n'
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_Compare',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ "                                Name(id='left', ctx=Store())],\n"
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='visit',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ '                                    Attribute(\n'
+ "                                        value=Name(id='node', ctx=Load()),\n"
+ "                                        attr='left',\n"
+ '                                        ctx=Load())],\n'
+ '                                keywords=[])),\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ "                                Name(id='comparators', ctx=Store())],\n"
+ '                            value=ListComp(\n'
+ '                                elt=Call(\n'
+ '                                    func=Attribute(\n'
+ "                                        value=Name(id='self', ctx=Load()),\n"
+ "                                        attr='visit',\n"
+ '                                        ctx=Load()),\n'
+ '                                    args=[\n'
+ "                                        Name(id='comp', ctx=Load())],\n"
+ '                                    keywords=[]),\n'
+ '                                generators=[\n'
+ '                                    comprehension(\n'
+ "                                        target=Name(id='comp', "
+ 'ctx=Store()),\n'
+ '                                        iter=Attribute(\n'
+ "                                            value=Name(id='node', "
+ 'ctx=Load()),\n'
+ "                                            attr='comparators',\n"
+ '                                            ctx=Load()),\n'
+ '                                        ifs=[],\n'
+ '                                        is_async=0)])),\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ "                                Name(id='ops', ctx=Store())],\n"
+ '                            value=ListComp(\n'
+ '                                elt=Call(\n'
+ '                                    func=Attribute(\n'
+ "                                        value=Name(id='self', ctx=Load()),\n"
+ "                                        attr='visit',\n"
+ '                                        ctx=Load()),\n'
+ '                                    args=[\n'
+ "                                        Name(id='op', ctx=Load())],\n"
+ '                                    keywords=[]),\n'
+ '                                generators=[\n'
+ '                                    comprehension(\n'
+ "                                        target=Name(id='op', ctx=Store()),\n"
+ '                                        iter=Attribute(\n'
+ "                                            value=Name(id='node', "
+ 'ctx=Load()),\n'
+ "                                            attr='ops',\n"
+ '                                            ctx=Load()),\n'
+ '                                        ifs=[],\n'
+ '                                        is_async=0)])),\n'
+ '                        Return(\n'
+ '                            value=JoinedStr(\n'
+ '                                values=[\n'
+ '                                    FormattedValue(\n'
+ "                                        value=Name(id='left', ctx=Load()),\n"
+ '                                        conversion=-1),\n'
+ "                                    Constant(value=' '),\n"
+ '                                    FormattedValue(\n'
+ '                                        value=Subscript(\n'
+ "                                            value=Name(id='ops', "
+ 'ctx=Load()),\n'
+ '                                            slice=Constant(value=0),\n'
+ '                                            ctx=Load()),\n'
+ '                                        conversion=-1),\n'
+ "                                    Constant(value=' '),\n"
+ '                                    FormattedValue(\n'
+ '                                        value=Subscript(\n'
+ "                                            value=Name(id='comparators', "
+ 'ctx=Load()),\n'
+ '                                            slice=Constant(value=0),\n'
+ '                                            ctx=Load()),\n'
+ '                                        conversion=-1)]))],\n'
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_Eq',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Return(\n'
+ "                            value=Constant(value='=='))],\n"
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_BoolOp',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ "                                Name(id='values', ctx=Store())],\n"
+ '                            value=ListComp(\n'
+ '                                elt=Call(\n'
+ '                                    func=Attribute(\n'
+ "                                        value=Name(id='self', ctx=Load()),\n"
+ "                                        attr='visit',\n"
+ '                                        ctx=Load()),\n'
+ '                                    args=[\n'
+ "                                        Name(id='value', ctx=Load())],\n"
+ '                                    keywords=[]),\n'
+ '                                generators=[\n'
+ '                                    comprehension(\n'
+ "                                        target=Name(id='value', "
+ 'ctx=Store()),\n'
+ '                                        iter=Attribute(\n'
+ "                                            value=Name(id='node', "
+ 'ctx=Load()),\n'
+ "                                            attr='values',\n"
+ '                                            ctx=Load()),\n'
+ '                                        ifs=[],\n'
+ '                                        is_async=0)])),\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ "                                Name(id='op', ctx=Store())],\n"
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='visit',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ '                                    Attribute(\n'
+ "                                        value=Name(id='node', ctx=Load()),\n"
+ "                                        attr='op',\n"
+ '                                        ctx=Load())],\n'
+ '                                keywords=[])),\n'
+ '                        Return(\n'
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ '                                    value=JoinedStr(\n'
+ '                                        values=[\n'
+ "                                            Constant(value=' '),\n"
+ '                                            FormattedValue(\n'
+ "                                                value=Name(id='op', "
+ 'ctx=Load()),\n'
+ '                                                conversion=-1),\n'
+ "                                            Constant(value=' ')]),\n"
+ "                                    attr='join',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ "                                    Name(id='values', ctx=Load())],\n"
+ '                                keywords=[]))],\n'
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_And',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Return(\n'
+ "                            value=Constant(value='&&'))],\n"
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_Or',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Return(\n'
+ "                            value=Constant(value='||'))],\n"
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_UnaryOp',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ "                                Name(id='operand', ctx=Store())],\n"
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='visit',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ '                                    Attribute(\n'
+ "                                        value=Name(id='node', ctx=Load()),\n"
+ "                                        attr='operand',\n"
+ '                                        ctx=Load())],\n'
+ '                                keywords=[])),\n'
+ '                        If(\n'
+ '                            test=Call(\n'
+ "                                func=Name(id='isinstance', ctx=Load()),\n"
+ '                                args=[\n'
+ '                                    Attribute(\n'
+ "                                        value=Name(id='node', ctx=Load()),\n"
+ "                                        attr='op',\n"
+ '                                        ctx=Load()),\n'
+ '                                    Attribute(\n'
+ "                                        value=Name(id='ast', ctx=Load()),\n"
+ "                                        attr='Not',\n"
+ '                                        ctx=Load())],\n'
+ '                                keywords=[]),\n'
+ '                            body=[\n'
+ '                                Return(\n'
+ '                                    value=JoinedStr(\n'
+ '                                        values=[\n'
+ "                                            Constant(value='('),\n"
+ '                                            FormattedValue(\n'
+ "                                                value=Name(id='operand', "
+ 'ctx=Load()),\n'
+ '                                                conversion=-1),\n'
+ "                                            Constant(value=' == "
+ "False)')]))],\n"
+ '                            orelse=[]),\n'
+ '                        Return(\n'
+ '                            value=JoinedStr(\n'
+ '                                values=[\n'
+ '                                    FormattedValue(\n'
+ "                                        value=Name(id='operand', "
+ 'ctx=Load()),\n'
+ '                                        conversion=-1)]))],\n'
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_Lambda',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ "                                Name(id='args', ctx=Store())],\n"
+ '                            value=ListComp(\n'
+ '                                elt=Call(\n'
+ '                                    func=Attribute(\n'
+ "                                        value=Name(id='self', ctx=Load()),\n"
+ "                                        attr='visit',\n"
+ '                                        ctx=Load()),\n'
+ '                                    args=[\n'
+ "                                        Name(id='arg', ctx=Load())],\n"
+ '                                    keywords=[]),\n'
+ '                                generators=[\n'
+ '                                    comprehension(\n'
+ "                                        target=Name(id='arg', ctx=Store()),\n"
+ '                                        iter=Attribute(\n'
+ '                                            value=Attribute(\n'
+ "                                                value=Name(id='node', "
+ 'ctx=Load()),\n'
+ "                                                attr='args',\n"
+ '                                                ctx=Load()),\n'
+ "                                            attr='args',\n"
+ '                                            ctx=Load()),\n'
+ '                                        ifs=[],\n'
+ '                                        is_async=0)])),\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ "                                Name(id='body', ctx=Store())],\n"
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='visit',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ '                                    Attribute(\n'
+ "                                        value=Name(id='node', ctx=Load()),\n"
+ "                                        attr='body',\n"
+ '                                        ctx=Load())],\n'
+ '                                keywords=[])),\n'
+ '                        Return(\n'
+ '                            value=JoinedStr(\n'
+ '                                values=[\n'
+ '                                    FormattedValue(\n'
+ '                                        value=Subscript(\n'
+ "                                            value=Name(id='args', "
+ 'ctx=Load()),\n'
+ '                                            slice=Constant(value=0),\n'
+ '                                            ctx=Load()),\n'
+ '                                        conversion=-1),\n'
+ "                                    Constant(value=' == '),\n"
+ '                                    FormattedValue(\n'
+ "                                        value=Name(id='body', ctx=Load()),\n"
+ '                                        conversion=-1)]))],\n'
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_Subscript',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ "                                Name(id='value', ctx=Store())],\n"
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='visit',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ '                                    Attribute(\n'
+ "                                        value=Name(id='node', ctx=Load()),\n"
+ "                                        attr='value',\n"
+ '                                        ctx=Load())],\n'
+ '                                keywords=[])),\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ "                                Name(id='slice', ctx=Store())],\n"
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='visit',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ '                                    Attribute(\n'
+ "                                        value=Name(id='node', ctx=Load()),\n"
+ "                                        attr='slice',\n"
+ '                                        ctx=Load())],\n'
+ '                                keywords=[])),\n'
+ '                        Return(\n'
+ '                            value=JoinedStr(\n'
+ '                                values=[\n'
+ '                                    FormattedValue(\n'
+ "                                        value=Name(id='value', ctx=Load()),\n"
+ '                                        conversion=-1),\n'
+ "                                    Constant(value='['),\n"
+ '                                    FormattedValue(\n'
+ "                                        value=Name(id='slice', ctx=Load()),\n"
+ '                                        conversion=-1),\n'
+ "                                    Constant(value=']')]))],\n"
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_Index',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Return(\n'
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ "                                    value=Name(id='self', ctx=Load()),\n"
+ "                                    attr='visit',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ '                                    Attribute(\n'
+ "                                        value=Name(id='node', ctx=Load()),\n"
+ "                                        attr='value',\n"
+ '                                        ctx=Load())],\n'
+ '                                keywords=[]))],\n'
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='visit_Return',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Return(\n'
+ '                            value=JoinedStr(\n'
+ '                                values=[\n'
+ "                                    Constant(value='return '),\n"
+ '                                    FormattedValue(\n'
+ '                                        value=Call(\n'
+ '                                            func=Attribute(\n'
+ "                                                value=Name(id='self', "
+ 'ctx=Load()),\n'
+ "                                                attr='visit',\n"
+ '                                                ctx=Load()),\n'
+ '                                            args=[\n'
+ '                                                Attribute(\n'
+ "                                                    value=Name(id='node', "
+ 'ctx=Load()),\n'
+ "                                                    attr='value',\n"
+ '                                                    ctx=Load())],\n'
+ '                                            keywords=[]),\n'
+ '                                        conversion=-1),\n'
+ "                                    Constant(value=';')]))],\n"
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='generic_visit',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self'),\n"
+ "                            arg(arg='node')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        For(\n'
+ '                            target=Tuple(\n'
+ '                                elts=[\n'
+ "                                    Name(id='field', ctx=Store()),\n"
+ "                                    Name(id='value', ctx=Store())],\n"
+ '                                ctx=Store()),\n'
+ '                            iter=Call(\n'
+ '                                func=Attribute(\n'
+ "                                    value=Name(id='ast', ctx=Load()),\n"
+ "                                    attr='iter_fields',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ "                                    Name(id='node', ctx=Load())],\n"
+ '                                keywords=[]),\n'
+ '                            body=[\n'
+ '                                If(\n'
+ '                                    test=Call(\n'
+ "                                        func=Name(id='isinstance', "
+ 'ctx=Load()),\n'
+ '                                        args=[\n'
+ "                                            Name(id='value', ctx=Load()),\n"
+ "                                            Name(id='list', ctx=Load())],\n"
+ '                                        keywords=[]),\n'
+ '                                    body=[\n'
+ '                                        For(\n'
+ "                                            target=Name(id='item', "
+ 'ctx=Store()),\n'
+ "                                            iter=Name(id='value', "
+ 'ctx=Load()),\n'
+ '                                            body=[\n'
+ '                                                If(\n'
+ '                                                    test=Call(\n'
+ '                                                        '
+ "func=Name(id='isinstance', ctx=Load()),\n"
+ '                                                        args=[\n'
+ "                                                            Name(id='item', "
+ 'ctx=Load()),\n'
+ '                                                            Attribute(\n'
+ '                                                                '
+ "value=Name(id='ast', ctx=Load()),\n"
+ "                                                                attr='AST',\n"
+ '                                                                '
+ 'ctx=Load())],\n'
+ '                                                        keywords=[]),\n'
+ '                                                    body=[\n'
+ '                                                        Expr(\n'
+ '                                                            value=Call(\n'
+ '                                                                '
+ 'func=Attribute(\n'
+ '                                                                    '
+ "value=Name(id='self', ctx=Load()),\n"
+ '                                                                    '
+ "attr='visit',\n"
+ '                                                                    '
+ 'ctx=Load()),\n'
+ '                                                                args=[\n'
+ '                                                                    '
+ "Name(id='item', ctx=Load())],\n"
+ '                                                                '
+ 'keywords=[]))],\n'
+ '                                                    orelse=[])],\n'
+ '                                            orelse=[])],\n'
+ '                                    orelse=[\n'
+ '                                        If(\n'
+ '                                            test=Call(\n'
+ "                                                func=Name(id='isinstance', "
+ 'ctx=Load()),\n'
+ '                                                args=[\n'
+ "                                                    Name(id='value', "
+ 'ctx=Load()),\n'
+ '                                                    Attribute(\n'
+ "                                                        value=Name(id='ast', "
+ 'ctx=Load()),\n'
+ "                                                        attr='AST',\n"
+ '                                                        ctx=Load())],\n'
+ '                                                keywords=[]),\n'
+ '                                            body=[\n'
+ '                                                Expr(\n'
+ '                                                    value=Call(\n'
+ '                                                        func=Attribute(\n'
+ '                                                            '
+ "value=Name(id='self', ctx=Load()),\n"
+ "                                                            attr='visit',\n"
+ '                                                            ctx=Load()),\n'
+ '                                                        args=[\n'
+ "                                                            Name(id='value', "
+ 'ctx=Load())],\n'
+ '                                                        keywords=[]))],\n'
+ '                                            orelse=[])])],\n'
+ '                            orelse=[])],\n'
+ '                    decorator_list=[]),\n'
+ '                FunctionDef(\n'
+ "                    name='get_code',\n"
+ '                    args=arguments(\n'
+ '                        posonlyargs=[],\n'
+ '                        args=[\n'
+ "                            arg(arg='self')],\n"
+ '                        kwonlyargs=[],\n'
+ '                        kw_defaults=[],\n'
+ '                        defaults=[]),\n'
+ '                    body=[\n'
+ '                        Return(\n'
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ "                                    value=Constant(value=''),\n"
+ "                                    attr='join',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[\n'
+ '                                    Attribute(\n'
+ "                                        value=Name(id='self', ctx=Load()),\n"
+ "                                        attr='dsl_code',\n"
+ '                                        ctx=Load())],\n'
+ '                                keywords=[]))],\n'
+ '                    decorator_list=[])],\n'
+ '            decorator_list=[]),\n'
+ '        FunctionDef(\n'
+ "            name='translate_to_dsl',\n"
+ '            args=arguments(\n'
+ '                posonlyargs=[],\n'
+ '                args=[\n'
+ "                    arg(arg='python_code')],\n"
+ '                kwonlyargs=[],\n'
+ '                kw_defaults=[],\n'
+ '                defaults=[]),\n'
+ '            body=[\n'
+ '                Assign(\n'
+ '                    targets=[\n'
+ "                        Name(id='tree', ctx=Store())],\n"
+ '                    value=Call(\n'
+ '                        func=Attribute(\n'
+ "                            value=Name(id='ast', ctx=Load()),\n"
+ "                            attr='parse',\n"
+ '                            ctx=Load()),\n'
+ '                        args=[\n'
+ "                            Name(id='python_code', ctx=Load())],\n"
+ '                        keywords=[])),\n'
+ '                Assign(\n'
+ '                    targets=[\n'
+ "                        Name(id='transformer', ctx=Store())],\n"
+ '                    value=Call(\n'
+ "                        func=Name(id='PythonToDSLTransformer', ctx=Load()),\n"
+ '                        args=[],\n'
+ '                        keywords=[])),\n'
+ '                Expr(\n'
+ '                    value=Call(\n'
+ '                        func=Attribute(\n'
+ "                            value=Name(id='transformer', ctx=Load()),\n"
+ "                            attr='visit',\n"
+ '                            ctx=Load()),\n'
+ '                        args=[\n'
+ "                            Name(id='tree', ctx=Load())],\n"
+ '                        keywords=[])),\n'
+ '                Return(\n'
+ '                    value=Call(\n'
+ '                        func=Attribute(\n'
+ "                            value=Name(id='transformer', ctx=Load()),\n"
+ "                            attr='get_code',\n"
+ '                            ctx=Load()),\n'
+ '                        args=[],\n'
+ '                        keywords=[]))],\n'
+ '            decorator_list=[]),\n'
+ '        Assign(\n'
+ '            targets=[\n'
+ "                Name(id='python_code', ctx=Store())],\n"
+ "            value=Constant(value='\\ndef Compute_SSSP(g, src_node):\\n    "
+ 'g.attachNodeProperty(distance=inf, modified=False, '
+ 'modified_next=False)\\n    g.modified[src_node] = True\\n    '
+ "g.distance[src_node] = 0\\n')),\n"
+ '        Assign(\n'
+ '            targets=[\n'
+ "                Name(id='dsl_code', ctx=Store())],\n"
+ '            value=Call(\n'
+ "                func=Name(id='translate_to_dsl', ctx=Load()),\n"
+ '                args=[\n'
+ "                    Name(id='python_code', ctx=Load())],\n"
+ '                keywords=[])),\n'
+ '        Expr(\n'
+ '            value=Call(\n'
+ "                func=Name(id='print', ctx=Load()),\n"
+ '                args=[\n'
+ "                    Name(id='dsl_code', ctx=Load())],\n"
+ '                keywords=[]))],\n'
+ '    type_ignores=[])')
