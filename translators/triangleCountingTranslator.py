@@ -108,7 +108,7 @@ def main():
     if len(sys.argv) < 2:
         print("Usage: python translator.py <path_to_input_file>")
         return
-    
+
     input_file = sys.argv[1]
 
     # Check if the file exists

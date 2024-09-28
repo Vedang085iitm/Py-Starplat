@@ -2,6 +2,7 @@ import ast
 import sys
 import os
 
+
 class ASTToCustomTranslator(ast.NodeVisitor):
     def __init__(self):
         self.translated_code = []
@@ -135,6 +136,7 @@ class ASTToCustomTranslator(ast.NodeVisitor):
             self.visit(child)
 
 # Example usage:
+
 def main():
     # Check if a file path is provided
     if len(sys.argv) < 2:
@@ -167,3 +169,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
