@@ -1,0 +1,231 @@
+('Module(\n'
+ '    body=[\n'
+ '        FunctionDef(\n'
+ "            name='Compute_PR',\n"
+ '            args=arguments(\n'
+ '                posonlyargs=[],\n'
+ '                args=[\n'
+ "                    arg(arg='g'),\n"
+ "                    arg(arg='beta'),\n"
+ "                    arg(arg='delta'),\n"
+ "                    arg(arg='maxIter')],\n"
+ '                kwonlyargs=[],\n'
+ '                kw_defaults=[],\n'
+ '                defaults=[]),\n'
+ '            body=[\n'
+ '                Assign(\n'
+ '                    targets=[\n'
+ "                        Name(id='num_nodes', ctx=Store())],\n"
+ '                    value=Call(\n'
+ '                        func=Attribute(\n'
+ "                            value=Name(id='g', ctx=Load()),\n"
+ "                            attr='num_nodes',\n"
+ '                            ctx=Load()),\n'
+ '                        args=[],\n'
+ '                        keywords=[])),\n'
+ '                Expr(\n'
+ '                    value=Call(\n'
+ '                        func=Attribute(\n'
+ "                            value=Name(id='g', ctx=Load()),\n"
+ "                            attr='attachNodeProperty',\n"
+ '                            ctx=Load()),\n'
+ '                        args=[],\n'
+ '                        keywords=[\n'
+ '                            keyword(\n'
+ "                                arg='pageRank',\n"
+ '                                value=BinOp(\n'
+ '                                    left=Constant(value=1),\n'
+ '                                    op=Div(),\n'
+ "                                    right=Name(id='num_nodes', "
+ 'ctx=Load()))),\n'
+ '                            keyword(\n'
+ "                                arg='pageRank_nxt',\n"
+ '                                value=Constant(value=0))])),\n'
+ '                Assign(\n'
+ '                    targets=[\n'
+ "                        Name(id='iterCount', ctx=Store())],\n"
+ '                    value=Constant(value=0)),\n'
+ '                Assign(\n'
+ '                    targets=[\n'
+ "                        Name(id='condition', ctx=Store())],\n"
+ '                    value=Constant(value=True)),\n'
+ '                While(\n'
+ "                    test=Name(id='condition', ctx=Load()),\n"
+ '                    body=[\n'
+ '                        For(\n'
+ "                            target=Name(id='v', ctx=Store()),\n"
+ '                            iter=Call(\n'
+ '                                func=Attribute(\n'
+ "                                    value=Name(id='g', ctx=Load()),\n"
+ "                                    attr='nodes',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[],\n'
+ '                                keywords=[]),\n'
+ '                            body=[\n'
+ '                                Assign(\n'
+ '                                    targets=[\n'
+ "                                        Name(id='sum', ctx=Store())],\n"
+ '                                    value=Constant(value=0.0)),\n'
+ '                                For(\n'
+ "                                    target=Name(id='nbr', ctx=Store()),\n"
+ '                                    iter=Call(\n'
+ '                                        func=Attribute(\n'
+ "                                            value=Name(id='g', ctx=Load()),\n"
+ "                                            attr='nodes_to',\n"
+ '                                            ctx=Load()),\n'
+ '                                        args=[\n'
+ "                                            Name(id='v', ctx=Load())],\n"
+ '                                        keywords=[]),\n'
+ '                                    body=[\n'
+ '                                        AugAssign(\n'
+ "                                            target=Name(id='sum', "
+ 'ctx=Store()),\n'
+ '                                            op=Add(),\n'
+ '                                            value=BinOp(\n'
+ '                                                left=Subscript(\n'
+ '                                                    value=Attribute(\n'
+ "                                                        value=Name(id='g', "
+ 'ctx=Load()),\n'
+ "                                                        attr='pageRank',\n"
+ '                                                        ctx=Load()),\n'
+ "                                                    slice=Name(id='nbr', "
+ 'ctx=Load()),\n'
+ '                                                    ctx=Load()),\n'
+ '                                                op=Div(),\n'
+ '                                                right=Call(\n'
+ '                                                    func=Attribute(\n'
+ "                                                        value=Name(id='g', "
+ 'ctx=Load()),\n'
+ '                                                        '
+ "attr='count_outNbrs',\n"
+ '                                                        ctx=Load()),\n'
+ '                                                    args=[\n'
+ "                                                        Name(id='nbr', "
+ 'ctx=Load())],\n'
+ '                                                    keywords=[])))],\n'
+ '                                    orelse=[]),\n'
+ '                                Assign(\n'
+ '                                    targets=[\n'
+ "                                        Name(id='val', ctx=Store())],\n"
+ '                                    value=BinOp(\n'
+ '                                        left=BinOp(\n'
+ '                                            left=BinOp(\n'
+ '                                                left=Constant(value=1),\n'
+ '                                                op=Sub(),\n'
+ "                                                right=Name(id='delta', "
+ 'ctx=Load())),\n'
+ '                                            op=Div(),\n'
+ "                                            right=Name(id='num_nodes', "
+ 'ctx=Load())),\n'
+ '                                        op=Add(),\n'
+ '                                        right=BinOp(\n'
+ "                                            left=Name(id='delta', "
+ 'ctx=Load()),\n'
+ '                                            op=Mult(),\n'
+ "                                            right=Name(id='sum', "
+ 'ctx=Load())))),\n'
+ '                                If(\n'
+ '                                    test=Compare(\n'
+ '                                        left=Subscript(\n'
+ '                                            value=Attribute(\n'
+ "                                                value=Name(id='g', "
+ 'ctx=Load()),\n'
+ "                                                attr='pageRank',\n"
+ '                                                ctx=Load()),\n'
+ "                                            slice=Name(id='v', ctx=Load()),\n"
+ '                                            ctx=Load()),\n'
+ '                                        ops=[\n'
+ '                                            GtE()],\n'
+ '                                        comparators=[\n'
+ '                                            Constant(value=0)]),\n'
+ '                                    body=[\n'
+ '                                        AugAssign(\n'
+ "                                            target=Name(id='diff', "
+ 'ctx=Store()),\n'
+ '                                            op=Add(),\n'
+ '                                            value=BinOp(\n'
+ '                                                left=Subscript(\n'
+ '                                                    value=Attribute(\n'
+ "                                                        value=Name(id='g', "
+ 'ctx=Load()),\n'
+ "                                                        attr='pageRank',\n"
+ '                                                        ctx=Load()),\n'
+ "                                                    slice=Name(id='v', "
+ 'ctx=Load()),\n'
+ '                                                    ctx=Load()),\n'
+ '                                                op=Sub(),\n'
+ "                                                right=Name(id='val', "
+ 'ctx=Load())))],\n'
+ '                                    orelse=[\n'
+ '                                        AugAssign(\n'
+ "                                            target=Name(id='diff', "
+ 'ctx=Store()),\n'
+ '                                            op=Add(),\n'
+ '                                            value=BinOp(\n'
+ "                                                left=Name(id='val', "
+ 'ctx=Load()),\n'
+ '                                                op=Sub(),\n'
+ '                                                right=Subscript(\n'
+ '                                                    value=Attribute(\n'
+ "                                                        value=Name(id='g', "
+ 'ctx=Load()),\n'
+ "                                                        attr='pageRank',\n"
+ '                                                        ctx=Load()),\n'
+ "                                                    slice=Name(id='v', "
+ 'ctx=Load()),\n'
+ '                                                    ctx=Load())))]),\n'
+ '                                Assign(\n'
+ '                                    targets=[\n'
+ '                                        Subscript(\n'
+ '                                            value=Attribute(\n'
+ "                                                value=Name(id='g', "
+ 'ctx=Load()),\n'
+ "                                                attr='pageRank_nxt',\n"
+ '                                                ctx=Load()),\n'
+ "                                            slice=Name(id='v', ctx=Load()),\n"
+ '                                            ctx=Store())],\n'
+ "                                    value=Name(id='val', ctx=Load()))],\n"
+ '                            orelse=[]),\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ '                                Attribute(\n'
+ "                                    value=Name(id='g', ctx=Load()),\n"
+ "                                    attr='pageRank',\n"
+ '                                    ctx=Store())],\n'
+ '                            value=Call(\n'
+ '                                func=Attribute(\n'
+ '                                    value=Attribute(\n'
+ "                                        value=Name(id='g', ctx=Load()),\n"
+ "                                        attr='pageRank_nxt',\n"
+ '                                        ctx=Load()),\n'
+ "                                    attr='copy',\n"
+ '                                    ctx=Load()),\n'
+ '                                args=[],\n'
+ '                                keywords=[])),\n'
+ '                        AugAssign(\n'
+ "                            target=Name(id='iterCount', ctx=Store()),\n"
+ '                            op=Add(),\n'
+ '                            value=Constant(value=1)),\n'
+ '                        Assign(\n'
+ '                            targets=[\n'
+ "                                Name(id='condition', ctx=Store())],\n"
+ '                            value=BoolOp(\n'
+ '                                op=And(),\n'
+ '                                values=[\n'
+ '                                    Compare(\n'
+ "                                        left=Name(id='diff', ctx=Load()),\n"
+ '                                        ops=[\n'
+ '                                            Gt()],\n'
+ '                                        comparators=[\n'
+ "                                            Name(id='beta', ctx=Load())]),\n"
+ '                                    Compare(\n'
+ "                                        left=Name(id='iterCount', "
+ 'ctx=Load()),\n'
+ '                                        ops=[\n'
+ '                                            Lt()],\n'
+ '                                        comparators=[\n'
+ "                                            Name(id='maxIter', "
+ 'ctx=Load())])]))],\n'
+ '                    orelse=[])],\n'
+ '            decorator_list=[])],\n'
+ '    type_ignores=[])')

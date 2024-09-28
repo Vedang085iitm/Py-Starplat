@@ -1,4 +1,6 @@
 import ast
+import sys
+import os
 
 class ASTToCustomTranslator(ast.NodeVisitor):
     def __init__(self):
@@ -19,15 +21,10 @@ class ASTToCustomTranslator(ast.NodeVisitor):
         self.translated_code.append("}\n")
 
     def visit_Assign(self, node):
-        # Visit the target and value nodes
         targets = [self.visit(t) for t in node.targets]
         value = self.visit(node.value)
-
-        # Skip the specific assignments `vc[v] = True` and `vc[nbr] = True`
         if any(target in ["vc[v]", "vc[nbr]"] for target in targets) and value == "True":
             return
-
-        # Handle `propNode` and `attachNodeProperty`
         if "propNode" in value:
             self.translated_code.append(f"    {value};\n")
         elif "attachNodeProperty" in value:
@@ -70,7 +67,6 @@ class ASTToCustomTranslator(ast.NodeVisitor):
             if isinstance(stmt, ast.Assign):
                 targets = [self.visit(t) for t in stmt.targets]
                 value = self.visit(stmt.value)
-                # Skip the specific assignments `vc[v] = True` and `vc[nbr] = True`
                 if any(target in ["vc[v]", "vc[nbr]"] for target in targets) and value == "True":
                     continue
                 if "g.visited[nbr]" in targets[0]:
@@ -84,10 +80,9 @@ class ASTToCustomTranslator(ast.NodeVisitor):
 
     def visit_Return(self, node):
         if isinstance(node.value, ast.Name) and node.value.id == 'vc':
-            return  # Skip the return statement if it returns 'vc'
+            return
         value = self.visit(node.value)
         self.translated_code.append(f"  return {value};\n")
-
 
     def visit_Name(self, node):
         return node.id
@@ -107,10 +102,6 @@ class ASTToCustomTranslator(ast.NodeVisitor):
     def visit_Index(self, node):
         return self.visit(node.value)
 
-    # def visit_Lambda(self, node):
-    #     body = self.visit(node.body)
-    #     return body
-    
     def visit_Lambda(self, node):
         args = [self.visit(arg) for arg in node.args.args]
         if not args:
@@ -144,20 +135,35 @@ class ASTToCustomTranslator(ast.NodeVisitor):
             self.visit(child)
 
 # Example usage:
-python_code = """
-def v_cover(g, vc):
-    propNode = type('propNode', (object,), {'visited': False})
-    g.attachNodeProperty(visited=propNode.visited)
-    for v in filter(lambda node: not g.visited[node], g.nodes()):
-        for nbr in g.neighbors(v):
-            if not g.visited[nbr]:
-                g.visited[nbr] = True
-                g.visited[v] = True
-                vc[v] = True
-                vc[nbr] = True
-    return vc
-"""
+def main():
+    # Check if a file path is provided
+    if len(sys.argv) < 2:
+        print("Usage: python translator.py <path_to_input_file>")
+        return
+    
+    input_file = sys.argv[1]
 
-translator = ASTToCustomTranslator()
-custom_code = translator.translate(python_code)
-print(custom_code)
+    # Check if the file exists
+    if not os.path.exists(input_file):
+        print(f"File '{input_file}' does not exist.")
+        return
+
+    # Read code from input file
+    with open(input_file, "r") as file:
+        python_code = file.read()
+
+    # Translate the code
+    translator = ASTToCustomTranslator()
+    custom_code = translator.translate(python_code)
+
+# Create the output directory if it doesn't exist
+    os.makedirs('output', exist_ok=True)
+    
+    # Save the DSL code to a file in the output directory
+    with open('output/v_CoverDSL.txt', 'w') as file:
+        file.write(custom_code)
+    
+    print("DSL code generated successfully!")
+
+if __name__ == "__main__":
+    main()
