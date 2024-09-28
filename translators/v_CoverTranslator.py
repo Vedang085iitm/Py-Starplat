@@ -1,7 +1,9 @@
 import ast
 import sys
 import os
-
+GREEN = '\033[0;32m'
+RED = '\033[0;31m'
+NC = '\033[0m'  # No Color
 
 class ASTToCustomTranslator(ast.NodeVisitor):
     def __init__(self):
@@ -140,14 +142,14 @@ class ASTToCustomTranslator(ast.NodeVisitor):
 def main():
     # Check if a file path is provided
     if len(sys.argv) < 2:
-        print("Usage: python translator.py <path_to_input_file>")
+        print(f"{RED}Usage: python translator.py <path_to_input_file>{NC}")
         return
     
     input_file = sys.argv[1]
 
     # Check if the file exists
     if not os.path.exists(input_file):
-        print(f"File '{input_file}' does not exist.")
+        print(f"{RED}File '{input_file}' does not exist.{NC}")
         return
 
     # Read code from input file
@@ -165,7 +167,7 @@ def main():
     with open('output/v_CoverDSL.txt', 'w') as file:
         file.write(custom_code)
     
-    print("DSL code generated successfully!")
+    print(f"{GREEN}DSL code generated successfully!{NC}")
 
 if __name__ == "__main__":
     main()
