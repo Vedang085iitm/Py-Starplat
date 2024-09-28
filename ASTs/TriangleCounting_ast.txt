@@ -1,0 +1,131 @@
+('Module(\n'
+ '    body=[\n'
+ '        FunctionDef(\n'
+ "            name='Compute_TC',\n"
+ '            args=arguments(\n'
+ '                posonlyargs=[],\n'
+ '                args=[\n'
+ "                    arg(arg='g')],\n"
+ '                kwonlyargs=[],\n'
+ '                kw_defaults=[],\n'
+ '                defaults=[]),\n'
+ '            body=[\n'
+ '                Assign(\n'
+ '                    targets=[\n'
+ "                        Name(id='triangle_count', ctx=Store())],\n"
+ '                    value=Constant(value=0)),\n'
+ '                For(\n'
+ "                    target=Name(id='v', ctx=Store()),\n"
+ '                    iter=Call(\n'
+ '                        func=Attribute(\n'
+ "                            value=Name(id='g', ctx=Load()),\n"
+ "                            attr='nodes',\n"
+ '                            ctx=Load()),\n'
+ '                        args=[],\n'
+ '                        keywords=[]),\n'
+ '                    body=[\n'
+ '                        For(\n'
+ "                            target=Name(id='u', ctx=Store()),\n"
+ '                            iter=Call(\n'
+ "                                func=Name(id='list', ctx=Load()),\n"
+ '                                args=[\n'
+ '                                    Call(\n'
+ "                                        func=Name(id='filter', ctx=Load()),\n"
+ '                                        args=[\n'
+ '                                            Lambda(\n'
+ '                                                args=arguments(\n'
+ '                                                    posonlyargs=[],\n'
+ '                                                    args=[\n'
+ "                                                        arg(arg='u')],\n"
+ '                                                    kwonlyargs=[],\n'
+ '                                                    kw_defaults=[],\n'
+ '                                                    defaults=[]),\n'
+ '                                                body=Compare(\n'
+ "                                                    left=Name(id='u', "
+ 'ctx=Load()),\n'
+ '                                                    ops=[\n'
+ '                                                        Lt()],\n'
+ '                                                    comparators=[\n'
+ "                                                        Name(id='v', "
+ 'ctx=Load())])),\n'
+ '                                            Call(\n'
+ '                                                func=Attribute(\n'
+ "                                                    value=Name(id='g', "
+ 'ctx=Load()),\n'
+ "                                                    attr='neighbors',\n"
+ '                                                    ctx=Load()),\n'
+ '                                                args=[\n'
+ "                                                    Name(id='v', "
+ 'ctx=Load())],\n'
+ '                                                keywords=[])],\n'
+ '                                        keywords=[])],\n'
+ '                                keywords=[]),\n'
+ '                            body=[\n'
+ '                                For(\n'
+ "                                    target=Name(id='w', ctx=Store()),\n"
+ '                                    iter=Call(\n'
+ "                                        func=Name(id='list', ctx=Load()),\n"
+ '                                        args=[\n'
+ '                                            Call(\n'
+ "                                                func=Name(id='filter', "
+ 'ctx=Load()),\n'
+ '                                                args=[\n'
+ '                                                    Lambda(\n'
+ '                                                        args=arguments(\n'
+ '                                                            posonlyargs=[],\n'
+ '                                                            args=[\n'
+ '                                                                '
+ "arg(arg='w')],\n"
+ '                                                            kwonlyargs=[],\n'
+ '                                                            kw_defaults=[],\n'
+ '                                                            defaults=[]),\n'
+ '                                                        body=Compare(\n'
+ '                                                            '
+ "left=Name(id='w', ctx=Load()),\n"
+ '                                                            ops=[\n'
+ '                                                                Gt()],\n'
+ '                                                            comparators=[\n'
+ "                                                                Name(id='v', "
+ 'ctx=Load())])),\n'
+ '                                                    Call(\n'
+ '                                                        func=Attribute(\n'
+ '                                                            '
+ "value=Name(id='g', ctx=Load()),\n"
+ '                                                            '
+ "attr='neighbors',\n"
+ '                                                            ctx=Load()),\n'
+ '                                                        args=[\n'
+ "                                                            Name(id='v', "
+ 'ctx=Load())],\n'
+ '                                                        keywords=[])],\n'
+ '                                                keywords=[])],\n'
+ '                                        keywords=[]),\n'
+ '                                    body=[\n'
+ '                                        If(\n'
+ '                                            test=Call(\n'
+ '                                                func=Attribute(\n'
+ "                                                    value=Name(id='g', "
+ 'ctx=Load()),\n'
+ "                                                    attr='is_an_edge',\n"
+ '                                                    ctx=Load()),\n'
+ '                                                args=[\n'
+ "                                                    Name(id='u', "
+ 'ctx=Load()),\n'
+ "                                                    Name(id='w', "
+ 'ctx=Load())],\n'
+ '                                                keywords=[]),\n'
+ '                                            body=[\n'
+ '                                                AugAssign(\n'
+ '                                                    '
+ "target=Name(id='triangle_count', ctx=Store()),\n"
+ '                                                    op=Add(),\n'
+ '                                                    '
+ 'value=Constant(value=1))],\n'
+ '                                            orelse=[])],\n'
+ '                                    orelse=[])],\n'
+ '                            orelse=[])],\n'
+ '                    orelse=[]),\n'
+ '                Return(\n'
+ "                    value=Name(id='triangle_count', ctx=Load()))],\n"
+ '            decorator_list=[])],\n'
+ '    type_ignores=[])')

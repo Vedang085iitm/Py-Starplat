@@ -1,7 +1,3 @@
-import ast
-import astpretty
-
-code = """
 def v_cover(g, vc):
     # Define the visited property
     propNode = type('propNode', (object,), {'visited': False})
@@ -22,10 +18,3 @@ def v_cover(g, vc):
                 vc[nbr] = True
     
     return vc
-"""
-
-# Parse the code into an AST
-tree = ast.parse(code)
-
-# Pretty print the AST
-astpretty.pprint(tree)
