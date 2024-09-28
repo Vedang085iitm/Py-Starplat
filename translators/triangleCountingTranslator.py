@@ -1,7 +1,10 @@
 import ast
 import os
 import sys
-
+# Define the ANSI escape code for green
+GREEN = '\033[0;32m'
+RED = '\033[0;31m'
+NC = '\033[0m'  # No Color
 class PythonToStarPlatTranslator(ast.NodeVisitor):
     def __init__(self):
         self.dsl_code = []
@@ -106,14 +109,14 @@ def translate_to_starplat(python_code):
 def main():
     # Check if a file path is provided
     if len(sys.argv) < 2:
-        print("Usage: python translator.py <path_to_input_file>")
+        print(f"{RED}Usage: python translator.py <path_to_input_file>{NC}")
         return
 
     input_file = sys.argv[1]
 
     # Check if the file exists
     if not os.path.exists(input_file):
-        print(f"File '{input_file}' does not exist.")
+        print(f"{RED}File '{input_file}' does not exist.{NC}")
         return
 
     # Read code from input file
@@ -130,7 +133,7 @@ def main():
     with open('output/triangleCountingDSL.txt', 'w') as file:
         file.write(dsl_code)
     
-    print("DSL code generated successfully!")
+print(f"{GREEN}DSL code generated successfully!{NC}")
 
 if __name__ == "__main__":
     main()

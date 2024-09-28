@@ -2,6 +2,10 @@ import ast
 import os
 import sys
 
+GREEN = '\033[0;32m'
+RED = '\033[0;31m'
+NC = '\033[0m'  # No Color
+
 def read_code_from_file(file_path):
     with open(file_path, 'r') as file:
         return file.read()
@@ -17,7 +21,7 @@ def translate_ast_to_code(parsed_ast):
     
     # Ensure the AST contains at least one node in the body
     if not isinstance(parsed_ast, ast.Module) or not parsed_ast.body:
-        raise ValueError("The AST does not contain a valid Module or it is empty.")
+        raise ValueError(f"{RED}The AST does not contain a valid Module or it is empty.{NC}")
     
     # Look for the first function definition in the AST
     function_def = None
@@ -34,10 +38,10 @@ def translate_ast_to_code(parsed_ast):
     
     if function_def is None:
         # Output detailed debugging information
-        print("AST does not contain a direct function definition or a method within a class.")
+        print(f"{RED}AST does not contain a direct function definition or a method within a class.{NC}")
         for node in parsed_ast.body:
-            print(f"Node type found: {type(node).__name__}")
-        raise ValueError("The AST does not contain a function definition.")
+                 print(f"{RED}Node type found: {type(node).__name__}{NC}")
+        raise ValueError(f"{RED}The AST does not contain a function definition.{NC}")
     
     # Extract the function name and arguments
     function_name = function_def.name
@@ -68,7 +72,7 @@ def translate_ast_to_code(parsed_ast):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python prTranslator.py <python_file>")
+        print(f"{RED}Usage: python translator.py <path_to_input_file>{NC}")
         sys.exit(1)
     
     python_file = sys.argv[1]
@@ -78,14 +82,14 @@ if __name__ == "__main__":
     try:
         parsed_ast = generate_ast_from_code(code)
     except ValueError as e:
-        print(f"Error parsing code to AST: {e}")
+        print(f"{RED}Error parsing code to AST: {e}{NC}")
         sys.exit(1)
     
     # Translate the AST to code
     try:
         generated_code = translate_ast_to_code(parsed_ast)
     except ValueError as e:
-        print(f"Error translating AST to code: {e}")
+        print(f"{RED}Error translating AST to code: {e}{NC}")
         sys.exit(1)
     
     # Create the output directory if it doesn't exist
@@ -95,4 +99,4 @@ if __name__ == "__main__":
     with open('output/pageRankDSL.txt', 'w') as file:
         file.write(generated_code)
     
-    print("DSL code generated successfully!")
+    print(f"{GREEN}DSL code generated successfully!{NC}")
