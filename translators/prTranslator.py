@@ -1,6 +1,7 @@
 import ast
 import os
 import sys
+import time  # Importing the time module
 
 GREEN = '\033[0;32m'
 RED = '\033[0;31m'
@@ -40,7 +41,7 @@ def translate_ast_to_code(parsed_ast):
         # Output detailed debugging information
         print(f"{RED}AST does not contain a direct function definition or a method within a class.{NC}")
         for node in parsed_ast.body:
-                 print(f"{RED}Node type found: {type(node).__name__}{NC}")
+            print(f"{RED}Node type found: {type(node).__name__}{NC}")
         raise ValueError(f"{RED}The AST does not contain a function definition.{NC}")
     
     # Extract the function name and arguments
@@ -71,6 +72,8 @@ def translate_ast_to_code(parsed_ast):
     return code
 
 if __name__ == "__main__":
+    start_time = time.time()  # Record the start time
+    
     if len(sys.argv) != 2:
         print(f"{RED}Usage: python translator.py <path_to_input_file>{NC}")
         sys.exit(1)
@@ -99,4 +102,8 @@ if __name__ == "__main__":
     with open('output/pageRankDSL.txt', 'w') as file:
         file.write(generated_code)
     
+    end_time = time.time()  # Record the end time
+    elapsed_time_microseconds = (end_time - start_time) * 1_000_000  # Calculate elapsed time in microseconds
+    
     print(f"{GREEN}DSL code generated successfully!{NC}")
+    print(f"{GREEN}Time taken: {elapsed_time_microseconds:.2f} microseconds{NC}")  # Print the time taken in microseconds
