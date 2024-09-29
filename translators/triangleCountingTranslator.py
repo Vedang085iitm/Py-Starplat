@@ -1,10 +1,13 @@
 import ast
 import os
 import sys
-# Define the ANSI escape code for green
+import time  # Importing the time module
+
+# Define the ANSI escape code for colors
 GREEN = '\033[0;32m'
 RED = '\033[0;31m'
 NC = '\033[0m'  # No Color
+
 class PythonToStarPlatTranslator(ast.NodeVisitor):
     def __init__(self):
         self.dsl_code = []
@@ -107,6 +110,8 @@ def translate_to_starplat(python_code):
     return translator.get_code()
 
 def main():
+    start_time = time.time()  # Start timing
+
     # Check if a file path is provided
     if len(sys.argv) < 2:
         print(f"{RED}Usage: python translator.py <path_to_input_file>{NC}")
@@ -128,12 +133,16 @@ def main():
 
     # Create the output directory if it doesn't exist
     os.makedirs('output', exist_ok=True)
-    
+
     # Save the DSL code to a file in the output directory
     with open('output/triangleCountingDSL.txt', 'w') as file:
         file.write(dsl_code)
-    
-print(f"{GREEN}DSL code generated successfully!{NC}")
+
+    end_time = time.time()  # End timing
+    elapsed_time_microseconds = (end_time - start_time) * 1_000_000  # Calculate elapsed time in microseconds
+
+    print(f"{GREEN}DSL code generated successfully!{NC}")
+    print(f"{GREEN}Time taken: {elapsed_time_microseconds:.2f} microseconds{NC}")  # Print the time taken in microseconds
 
 if __name__ == "__main__":
     main()
