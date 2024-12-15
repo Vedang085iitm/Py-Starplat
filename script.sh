@@ -24,7 +24,7 @@ while true; do
             ;;
         "v_cover")
             python3 translators/v_CoverTranslator.py availableGraphs/v_cover.py
-            python3 translators/prTranslator.py availableGraphs/PageRank.py
+           
             ;;
         "pagerank")
             python3 translators/prTranslator.py availableGraphs/PageRank.py

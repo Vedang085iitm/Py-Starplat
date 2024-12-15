@@ -132,10 +132,10 @@ def main():
     dsl_code = translate_to_starplat(python_code)
 
     # Create the output directory if it doesn't exist
-    os.makedirs('output', exist_ok=True)
+    os.makedirs('dslCodes', exist_ok=True)
 
     # Save the DSL code to a file in the output directory
-    with open('output/triangleCountingDSL.txt', 'w') as file:
+    with open('dslCodes/triangleCountingDSL.txt', 'w') as file:
         file.write(dsl_code)
 
     end_time = time.time()  # End timing

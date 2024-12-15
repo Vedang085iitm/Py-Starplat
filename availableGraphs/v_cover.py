@@ -9,7 +9,8 @@ def v_cover(g, vc):
     for v in filter(lambda node: not g.visited[node], g.nodes()):
         # For each unvisited node, check its neighbors
         for nbr in g.neighbors(v):
-            # If the neighbor is also unvisited, mark both the node and the neighbor as visited
+            # If the neighbor is also unvisited, mark both the node 
+            # and the neighbor as visited
             if not g.visited[nbr]:
                 g.visited[nbr] = True
                 g.visited[v] = True

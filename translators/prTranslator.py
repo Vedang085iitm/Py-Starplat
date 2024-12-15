@@ -17,12 +17,9 @@ def generate_ast_from_code(code):
     return parsed_ast
 
 def translate_ast_to_code(parsed_ast):
-    # Commented out the AST printing for debugging
-    # print(ast.dump(parsed_ast, indent=4))
-    
     # Ensure the AST contains at least one node in the body
     if not isinstance(parsed_ast, ast.Module) or not parsed_ast.body:
-        raise ValueError(f"{RED}The AST does not contain a valid Module or it is empty.{NC}")
+        raise ValueError(f"The AST does not contain a valid Module or it is empty.")
     
     # Look for the first function definition in the AST
     function_def = None
@@ -39,10 +36,10 @@ def translate_ast_to_code(parsed_ast):
     
     if function_def is None:
         # Output detailed debugging information
-        print(f"{RED}AST does not contain a direct function definition or a method within a class.{NC}")
+        print(f"AST does not contain a direct function definition or a method within a class.")
         for node in parsed_ast.body:
-            print(f"{RED}Node type found: {type(node).__name__}{NC}")
-        raise ValueError(f"{RED}The AST does not contain a function definition.{NC}")
+            print(f"Node type found: {type(node).__name__}")
+        raise ValueError(f"The AST does not contain a function definition.")
     
     # Extract the function name and arguments
     function_name = function_def.name
@@ -50,23 +47,23 @@ def translate_ast_to_code(parsed_ast):
     
     # Start building the function code
     code = f"function {function_name}(Graph {args[0]}, float {args[1]}, float {args[2]}, int {args[3]}, propNode < float > pageRank) {{\n"
-    code += "  float num_nodes = g.num_nodes();\n"
+    code += f"  float num_nodes = {args[0]}.num_nodes();\n"
     code += "  propNode < float > pageRank_nxt;\n"
-    code += "  g.attachNodeProperty(pageRank = 1 / num_nodes, pageRank_nxt = 0);\n"
+    code += f"  {args[0]}.attachNodeProperty(pageRank = 1 / num_nodes, pageRank_nxt = 0);\n"
     code += "  int iterCount = 0;\n"
     code += "  float diff;\n"
     code += "  do {\n"
-    code += "    forall(v in g.nodes()) {\n"
+    code += f"    forall(v in {args[0]}.nodes()) {{\n"
     code += "      float sum = 0.0;\n"
-    code += "      for (nbr in g.nodes_to(v)) {\n"
-    code += "        sum = sum + nbr.pageRank / g.count_outNbrs(nbr);\n"
+    code += f"      for (nbr in {args[0]}.nodes_to(v)) {{\n"
+    code += f"        sum = sum + nbr.pageRank / {args[0]}.count_outNbrs(nbr);\n"
     code += "      }\n"
-    code += "      float val = (1 - delta) / num_nodes + delta * sum;\n"
+    code += f"      float val = (1 - {args[2]}) / num_nodes + {args[2]} * sum;\n"
     code += "      v.pageRank_nxt = val;\n"
     code += "    }\n"
     code += "    pageRank = pageRank_nxt;\n"
     code += "    iterCount++;\n"
-    code += "  } while ((diff > beta) && (iterCount < maxIter));\n"
+    code += f"  }} while ((diff > {args[1]}) && (iterCount < {args[3]}));\n"
     code += "}\n"
     
     return code
@@ -96,10 +93,10 @@ if __name__ == "__main__":
         sys.exit(1)
     
     # Create the output directory if it doesn't exist
-    os.makedirs('output', exist_ok=True)
+    os.makedirs('dslCodes', exist_ok=True)
     
     # Save the DSL code to a file in the output directory
-    with open('output/pageRankDSL.txt', 'w') as file:
+    with open('dslCodes/pageRankDSL.txt', 'w') as file:
         file.write(generated_code)
     
     end_time = time.time()  # Record the end time

@@ -165,10 +165,10 @@ def main():
     custom_code = translator.translate(python_code)
 
     # Create the output directory if it doesn't exist
-    os.makedirs('output', exist_ok=True)
+    os.makedirs('dslCodes', exist_ok=True)
     
     # Save the DSL code to a file in the output directory
-    with open('output/v_CoverDSL.txt', 'w') as file:
+    with open('dslCodes/v_CoverDSL.txt', 'w') as file:
         file.write(custom_code)
     
     end_time = time.time()  # Record the end time
