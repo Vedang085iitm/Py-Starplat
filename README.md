@@ -113,7 +113,7 @@ To run the translators, follow these steps:
 
 ## To use each Translator Separately
 
-    python translator.py <path_to_python_code or input_file.py>
+    python3 translator.py <path_to_python_code or input_file.py>
 
 
 
