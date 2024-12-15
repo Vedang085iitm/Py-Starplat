@@ -2,16 +2,16 @@ from math import inf
 from constructs.FixedPointUntil import FixedPointUntil
 from constructs.FixedPoint import FixedPoint
 
-def Compute_SSSP(g, src_node):
-    g.attachNodeProperty(distance=inf, modified=False, modified_next=False)
-    g.modified[src_node] = True
-    g.distance[src_node] = 0
+def Compute_SSSP(G, src_node):
+    G.attachNodeProperty(distance=inf, modified=False, modified_next=False)
+    G.modified[src_node] = True
+    G.distance[src_node] = 0
 
     # finished = False
     
     def condition():
         finished = True
-        for v in g.modified.values():
+        for v in G.modified.values():
             finished = finished and (not v)
         
         return finished
@@ -20,24 +20,24 @@ def Compute_SSSP(g, src_node):
         
         def block():
 
-            for v in filter(lambda node: g.modified[node] == True, g.nodes()):
+            for v in filter(lambda node: G.modified[node] == True, G.nodes()):
 
-                # Changed loop to accessing via nodes
-                for nbr in g.getOutNeighbors(v):
+                # ChanGed loop to accessinG via nodes
+                for nbr in G.GetOutNeiGhbors(v):
 
-                    e = g.get_edge(v, nbr)
+                    e = G.Get_edGe(v, nbr)
 
-                    new_distance = g.distance[v] + e.weight
-                    if new_distance < g.distance[nbr]:
+                    new_distance = G.distance[v] + e.weiGht
+                    if new_distance < G.distance[nbr]:
                         
-                        g.distance[nbr] = new_distance
-                        g.modified_next[nbr] = True
+                        G.distance[nbr] = new_distance
+                        G.modified_next[nbr] = True
 
-            # Making a deep copy
-            g.modified = g.modified_next.copy()
+            # MakinG a deep copy
+            G.modified = G.modified_next.copy()
 
-            g.attachNodeProperty(modified_next=False)
+            G.attachNodeProperty(modified_next=False)
         
         loop.run(block)
         
-    return g.distance
+    return G.distance
