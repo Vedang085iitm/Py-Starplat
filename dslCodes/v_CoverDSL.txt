@@ -10,5 +10,4 @@ function v_cover(Graph g)
         }
     }
     }
-    return vc;
 }

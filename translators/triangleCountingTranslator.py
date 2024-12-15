@@ -1,5 +1,12 @@
 import ast
 import os
+import sys
+import time  # Importing the time module
+
+# Define the ANSI escape code for colors
+GREEN = '\033[0;32m'
+RED = '\033[0;31m'
+NC = '\033[0m'  # No Color
 
 class PythonToStarPlatTranslator(ast.NodeVisitor):
     def __init__(self):
@@ -102,23 +109,40 @@ def translate_to_starplat(python_code):
     translator.visit(tree)
     return translator.get_code()
 
-python_code = """
-def Compute_TC(g):
-    triangle_count = 0
-    
-    for v in g.nodes():
-        for u in filter(lambda u: u<v, g.neighbors(v)):
-            for w in filter(lambda w: w>v, g.neighbors(v)):
-                if g.is_an_edge(u,w):
-                    triangle_count += 1
-                    
-    return triangle_count
-"""
+def main():
+    start_time = time.time()  # Start timing
 
-dsl_code = translate_to_starplat(python_code)
-# Create the output directory if it doesn't exist
-os.makedirs('output', exist_ok=True)
+    # Check if a file path is provided
+    if len(sys.argv) < 2:
+        print(f"{RED}Usage: python translator.py <path_to_input_file>{NC}")
+        return
 
-# Save the DSL code to a file in the output directory
-with open('output/triangleCountingDSL', 'w') as file:
-    file.write(dsl_code)
+    input_file = sys.argv[1]
+
+    # Check if the file exists
+    if not os.path.exists(input_file):
+        print(f"{RED}File '{input_file}' does not exist.{NC}")
+        return
+
+    # Read code from input file
+    with open(input_file, "r") as file:
+        python_code = file.read()
+
+    # Translate the code
+    dsl_code = translate_to_starplat(python_code)
+
+    # Create the output directory if it doesn't exist
+    os.makedirs('dslCodes', exist_ok=True)
+
+    # Save the DSL code to a file in the output directory
+    with open('dslCodes/triangleCountingDSL.txt', 'w') as file:
+        file.write(dsl_code)
+
+    end_time = time.time()  # End timing
+    elapsed_time_microseconds = (end_time - start_time) * 1_000_000  # Calculate elapsed time in microseconds
+
+    print(f"{GREEN}DSL code generated successfully!{NC}")
+    print(f"{GREEN}Time taken: {elapsed_time_microseconds:.2f} microseconds{NC}")  # Print the time taken in microseconds
+
+if __name__ == "__main__":
+    main()
